@@ -19,5 +19,8 @@ public class TransacaoService {
         transacaoRepository.save(transacao);
     }
 
+    public void deleteTransacao(){
+        transacaoRepository.deleteAll();
+    }
 
 }

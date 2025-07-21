@@ -6,10 +6,7 @@ import com.desafio.itau.backend.service.TransacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping
@@ -18,7 +15,7 @@ public class TransacaoController {
     @Autowired
     private TransacaoService transacaoService;
 
-    @PostMapping
+    @PostMapping("/transacao")
     public ResponseEntity<Transacao> createTransacao(@RequestBody Transacao transacao) {
 
         if (transacao == null) {
@@ -34,5 +31,11 @@ public class TransacaoController {
         transacaoService.createTransacao(transacao);
         return new ResponseEntity<>(transacao, HttpStatus.CREATED);
 
+    }
+
+    @DeleteMapping("/transacao")
+    public ResponseEntity<Void> deleteTransacao(){
+
+        transacaoService.deleteTransacao();
     }
 }
