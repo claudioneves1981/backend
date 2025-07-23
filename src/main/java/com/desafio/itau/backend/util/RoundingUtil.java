@@ -51,7 +51,7 @@ public class RoundingUtil {
 
                 result = roundingUp(number);
 
-            }
+            } // falta 6 a 9
 
         }else{
 
