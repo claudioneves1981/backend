@@ -17,7 +17,7 @@ public class RoundingUtil {
     private Double roundingDown(Double number){
 
         BigDecimal bg = BigDecimal.valueOf(number);
-        bg = bg.setScale(2, RoundingMode.HALF_UP);
+        bg = bg.setScale(2, RoundingMode.HALF_DOWN);
         return bg.doubleValue();
 
     }
@@ -47,11 +47,16 @@ public class RoundingUtil {
             if(halfNumber[1].charAt(2) == 5 && halfNumber[1].charAt(1) % 2 == 0) {
 
                 result = roundingDown(number);
-            }else{
+
+            }else if(halfNumber[1].charAt(2) == 5 && halfNumber[1].charAt(1) % 2 == 1){
 
                 result = roundingUp(number);
 
-            } // falta 6 a 9
+            }else if(halfNumber[1].charAt(2) > 5){
+
+                result = roundingUp(number);
+
+            }
 
         }else{
 
