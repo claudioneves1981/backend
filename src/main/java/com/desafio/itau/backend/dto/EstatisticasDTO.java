@@ -1,15 +1,13 @@
-package com.desafio.itau.backend.model;
+package com.desafio.itau.backend.dto;
 
-import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Estatisticas {
+public class EstatisticasDTO {
 
     private long count;
     private double sum;

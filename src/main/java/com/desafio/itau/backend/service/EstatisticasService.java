@@ -1,17 +1,13 @@
 package com.desafio.itau.backend.service;
 
-import com.desafio.itau.backend.model.Estatisticas;
+import com.desafio.itau.backend.dto.EstatisticasDTO;
 import com.desafio.itau.backend.model.Transacao;
 import com.desafio.itau.backend.repository.TransacaoRepository;
+import com.desafio.itau.backend.util.RoundingUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.Duration;
 import java.time.OffsetDateTime;
-import java.time.temporal.Temporal;
-import java.time.temporal.TemporalAmount;
-import java.time.temporal.TemporalUnit;
-import java.util.ArrayList;
 import java.util.DoubleSummaryStatistics;
 import java.util.List;
 import java.util.stream.DoubleStream;
@@ -22,7 +18,9 @@ public class EstatisticasService {
     @Autowired
     private TransacaoRepository transacaoRepository;
 
-    public Estatisticas getEstatisticas(){
+
+
+    public EstatisticasDTO getEstatisticas(){
 
         List<Transacao> transacoes = transacaoRepository.findAll();
 
@@ -45,14 +43,14 @@ public class EstatisticasService {
         }
 
         DoubleSummaryStatistics stats = DoubleStream.of(valores).summaryStatistics();
+        RoundingUtil roundingUtil = new RoundingUtil();
 
-
-        Estatisticas estatisticas = new Estatisticas();
-        estatisticas.setAvg(stats.getAverage());
+        EstatisticasDTO estatisticas = new EstatisticasDTO();
+        estatisticas.setAvg(roundingUtil.roundingNumber(stats.getAverage()));
         estatisticas.setCount(stats.getCount());
-        estatisticas.setMax(stats.getMax());
-        estatisticas.setMin(stats.getMin());
-        estatisticas.setSum(stats.getSum());
+        estatisticas.setMax(roundingUtil.roundingNumber(stats.getMax()));
+        estatisticas.setMin(roundingUtil.roundingNumber(stats.getMin()));
+        estatisticas.setSum(roundingUtil.roundingNumber(stats.getSum()));
 
         return estatisticas;
 

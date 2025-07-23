@@ -1,6 +1,7 @@
 package com.desafio.itau.backend.controller;
 
 
+import com.desafio.itau.backend.dto.TransacaoDTO;
 import com.desafio.itau.backend.model.Transacao;
 import com.desafio.itau.backend.service.TransacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class TransacaoController {
     private TransacaoService transacaoService;
 
     @PostMapping("/transacao")
-    public ResponseEntity<Transacao> createTransacao(@RequestBody Transacao transacao) {
+    public ResponseEntity<TransacaoDTO> createTransacao(@RequestBody TransacaoDTO transacao) {
 
         if (transacao == null) {
 
@@ -35,7 +36,7 @@ public class TransacaoController {
 
     @DeleteMapping("/transacao")
     public ResponseEntity<Void> deleteTransacao(){
-
         transacaoService.deleteTransacao();
+        return ResponseEntity.ok().build();
     }
 }

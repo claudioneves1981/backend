@@ -1,7 +1,7 @@
 package com.desafio.itau.backend.controller;
 
 
-import com.desafio.itau.backend.model.Estatisticas;
+import com.desafio.itau.backend.dto.EstatisticasDTO;
 import com.desafio.itau.backend.service.EstatisticasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +16,8 @@ public class EstatisticasController {
     @Autowired
     private EstatisticasService estatisticasService;
 
-
     @GetMapping("/estatisticas")
-    public ResponseEntity<Estatisticas> getEstatisticas(){
+    public ResponseEntity<EstatisticasDTO> getEstatisticas(){
         return ResponseEntity.ok(estatisticasService.getEstatisticas());
 
     }
