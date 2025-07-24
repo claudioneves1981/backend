@@ -34,7 +34,7 @@ public class RoundingUtil {
 
         if(halfNumber[1].length() > 3){
 
-            if(halfNumber[1].charAt(3) > 0 && halfNumber[1].charAt(2) == 5){
+            if((int)(halfNumber[1].charAt(3)) > 0 && halfNumber[1].charAt(2) == '5'){
 
                 result = roundingUp(number);
 
@@ -44,15 +44,15 @@ public class RoundingUtil {
         }else if(halfNumber[1].length() == 3){
 
 
-            if(halfNumber[1].charAt(2) == 5 && halfNumber[1].charAt(1) % 2 == 0) {
+            if(halfNumber[1].charAt(2) == '5' && (int)(halfNumber[1].charAt(1)) % 2 == 0) {
 
                 result = roundingDown(number);
 
-            }else if(halfNumber[1].charAt(2) == 5 && halfNumber[1].charAt(1) % 2 == 1){
+            }else if(halfNumber[1].charAt(2) == '5' && (int)(halfNumber[1].charAt(1)) % 2 == 1){
 
                 result = roundingUp(number);
 
-            }else if(halfNumber[1].charAt(2) > 5){
+            }else if((int)(halfNumber[1].charAt(2)) > 5){
 
                 result = roundingUp(number);
 

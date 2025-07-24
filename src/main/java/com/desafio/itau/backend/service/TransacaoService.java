@@ -14,7 +14,7 @@ public class TransacaoService {
     @Autowired
     private TransacaoRepository transacaoRepository;
 
-    private final Transacao transacao = new Transacao();
+
 
     public void deleteTransacao(){
         transacaoRepository.deleteAll();
@@ -27,6 +27,8 @@ public class TransacaoService {
             return false;
 
         }
+
+        Transacao transacao = new Transacao();
 
         transacao.setValor(transacaoDTO.getValor());
         transacao.setDataHora(OffsetDateTime.now());
