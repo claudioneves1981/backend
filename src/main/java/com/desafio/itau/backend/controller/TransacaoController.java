@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 @RestController
 @RequestMapping
 public class TransacaoController {
@@ -16,21 +19,18 @@ public class TransacaoController {
     @Autowired
     private TransacaoService transacaoService;
 
+    private final List<TransacaoDTO> transacoes = new CopyOnWriteArrayList<>();
+
     @PostMapping("/transacao")
-    public ResponseEntity<TransacaoDTO> createTransacao(@RequestBody TransacaoDTO transacao) {
+    public ResponseEntity<Void> createTransacao(@RequestBody TransacaoDTO transacao) {
 
-        if (transacao == null) {
+        boolean isValid = transacaoService.isValidTransacao(transacao);
 
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-
-        } else if (transacao.getValor() < 0) {
-
+        if(isValid){
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }else{
             return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
-
         }
-
-        transacaoService.createTransacao(transacao);
-        return new ResponseEntity<>(transacao, HttpStatus.CREATED);
 
     }
 

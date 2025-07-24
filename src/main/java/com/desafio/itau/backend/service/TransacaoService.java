@@ -14,16 +14,26 @@ public class TransacaoService {
     @Autowired
     private TransacaoRepository transacaoRepository;
 
-    public void createTransacao(TransacaoDTO transacaoDTO){
-
-        Transacao transacao = new Transacao();
-        transacao.setValor(transacaoDTO.getValor());
-        transacao.setDataHora(OffsetDateTime.now());
-        transacaoRepository.save(transacao);
-    }
+    private final Transacao transacao = new Transacao();
 
     public void deleteTransacao(){
         transacaoRepository.deleteAll();
+    }
+
+    public boolean isValidTransacao(TransacaoDTO transacaoDTO){
+
+        if(transacaoDTO.getValor() < 0){
+
+            return false;
+
+        }
+
+        transacao.setValor(transacaoDTO.getValor());
+        transacao.setDataHora(OffsetDateTime.now());
+        transacaoRepository.save(transacao);
+
+        return true;
+
     }
 
 
